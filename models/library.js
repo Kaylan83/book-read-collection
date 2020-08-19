@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         author: {
-            type: DataTypes.String,
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
                 len: [1]
