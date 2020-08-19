@@ -4,6 +4,9 @@ var PORT = process.env.PORT || 8080;
 
 var app = express();
 
+// Requiring our models for syncing
+var db = require("./models");
+
 // Serve static content for the app from the "public" directory
 app.use(express.static("public"));
 
@@ -23,6 +26,8 @@ var routes = require("./controllers/books_controller.js");
 app.use(routes);
 
 // Start the server so that it can begin listening to client
-app.listen(PORT, function() {
-  console.log("Server Listening on: http://localhost:" + PORT);
+db.sequelize.sync({ force: false }).then(function() {
+  app.listen(PORT, function() {
+    console.log("App listening on PORT " + PORT);
+  });
 });
