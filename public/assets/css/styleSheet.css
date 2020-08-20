@@ -1,0 +1,20 @@
+
+body {
+    background-image: url("./images/readbackground.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+.marginTop{
+    margin-top: 100px;
+    
+}
+
+.padding{
+    padding: 100px 200px 200px 200px;
+}
+.trans {
+    background-color: rgba(100, 100, 100, 0.295);
+    color: white;
+    font-size: 15px;
+}
+
