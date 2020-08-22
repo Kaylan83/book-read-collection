@@ -1,4 +1,33 @@
 $(document).ready(function() {
+
+    //Login info
+    $("#loginButton").on("click", function(ev) {
+        ev.preventDefault();     
+        var loginUserName = $("#signinUsername").val().trim();
+        var loginPass = $("#signinPassword").val().trim();  
+        
+        
+        let loginUser = {
+            user_name: loginUserName,
+            password: loginPass
+        }
+        
+        
+        $.post("/api/login", loginUser)
+            .then(() => {
+              window.location.replace("/library");
+              // If there's an error, log the error
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        
+    });
+    
+    
+    $.get("/api/user_data").then(data => {
+        $(".member-name").text(data.email);
+      });
     
     
     //New User submit in modal
@@ -90,6 +119,7 @@ $(document).ready(function() {
               console.log("Signing in!");
             });   
     });
+
     
 
     

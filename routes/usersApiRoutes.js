@@ -1,7 +1,16 @@
 
 var db = require("../models");
+var passport = require("../config/passport");
 
 module.exports = function(app) {  
+    
+    app.post("/api/login", passport.authenticate("local"), (req, res) => {
+        // Sending back a password, even a hashed password, isn't a good idea
+        res.json({
+          user_name: req.user.user_name,
+          id: req.user.id
+        });
+      });
     
     app.get("/api/users", function(req, res) {
         console.log(req.body);
@@ -32,5 +41,11 @@ module.exports = function(app) {
           res.json(dbUser);
         });
     });
+    
+    //Logout get request
+    app.get("/logout", function(req, res) {
+        req.logout();
+        res.redirect("/");
+      });
 
 };
