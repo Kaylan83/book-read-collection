@@ -3,6 +3,20 @@ var db = require("../models");
 
 module.exports = function(app) {  
     
+    app.get("/api/users", function(req, res) {
+        console.log(req.body);
+        
+        db.Users.findOne({
+            where: {
+                user_name: req.body.user_name
+            }
+        }).then(function(dbTodo) {
+            // We have access to the todos as an argument inside of the callback function
+            res.json(dbTodo);
+          });
+        
+    });
+    
     app.post("/api/users", function(req, res) {
         console.log(req.body);
         // create takes an argument of an object describing the item we want to
@@ -17,6 +31,6 @@ module.exports = function(app) {
           // We have access to the new todo as an argument inside of the callback function
           res.json(dbUser);
         });
-      });
+    });
 
 };

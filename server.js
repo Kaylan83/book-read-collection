@@ -1,4 +1,5 @@
 var express = require("express");
+var passport = require("./config/passport");
 
 var PORT = process.env.PORT || 8080;
 
