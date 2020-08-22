@@ -1,10 +1,40 @@
 $(document).ready(function() {
+
+    //Login info
+    $("#loginButton").on("click", function(ev) {
+        ev.preventDefault();     
+        var loginUserName = $("#signinUsername").val().trim();
+        var loginPass = $("#signinPassword").val().trim();  
+        
+        
+        let loginUser = {
+            user_name: loginUserName,
+            password: loginPass
+        }
+        
+        
+        $.post("/api/login", loginUser)
+            .then(() => {
+              window.location.replace("/library");
+              // If there's an error, log the error
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        
+    });
+    
+    
+    $.get("/api/user_data").then(data => {
+        $(".member-name").text(data.email);
+      });
     
     
     //New User submit in modal
     $("#newUserSubmit").on("click", function(ev) {
         ev.preventDefault();
-        console.log("ner user click")
+        
+        //Grab input fields
         var userName = $("#userName").val().trim();
         var password = $("#password").val().trim();
         var firstName = $("#firstName").val().trim();
@@ -23,15 +53,14 @@ $(document).ready(function() {
             url: "/api/users/",
             data: newUser
           }).then(function(data) {
-            });
-            
+              console.log("Succesfully created new user!");
+            });           
             
         //Clear input fields
         $("#userName").val("");
         $("#password").val("");
         $("#firstName").val("");
-        $("#lastName").val("");
-            
+        $("#lastName").val("");   
     });
 
     $("#addNewBook").on("click", function(ev) {
@@ -66,6 +95,31 @@ $(document).ready(function() {
             
     });
     
+    
+    //Login User and Password
+    
+    $("#loginButton").on("click", function(ev) {
+        ev.preventDefault();
+        
+        //Grab input fields
+        var userName = $("#signinUsername").val().trim();
+        var password = $("#signinPassword").val().trim();
+        
+        var user = {
+            user_name: userName,
+            password: password,
+        }
+        
+        //Send new user info to the api route
+        $.ajax({
+            method: "GET",
+            url: "/api/users/",
+            data: user
+          }).then(function(data) {
+              console.log("Signing in!");
+            });   
+    });
+
     
 
     

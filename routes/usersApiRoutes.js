@@ -1,7 +1,30 @@
 
 var db = require("../models");
+var passport = require("../config/passport");
 
 module.exports = function(app) {  
+    
+    app.post("/api/login", passport.authenticate("local"), (req, res) => {
+        // Sending back a password, even a hashed password, isn't a good idea
+        res.json({
+          user_name: req.user.user_name,
+          id: req.user.id
+        });
+      });
+    
+    app.get("/api/users", function(req, res) {
+        console.log(req.body);
+        
+        db.Users.findOne({
+            where: {
+                user_name: req.body.user_name
+            }
+        }).then(function(dbTodo) {
+            // We have access to the todos as an argument inside of the callback function
+            res.json(dbTodo);
+          });
+        
+    });
     
     app.post("/api/users", function(req, res) {
         console.log(req.body);
@@ -17,6 +40,12 @@ module.exports = function(app) {
           // We have access to the new todo as an argument inside of the callback function
           res.json(dbUser);
         });
+    });
+    
+    //Logout get request
+    app.get("/logout", function(req, res) {
+        req.logout();
+        res.redirect("/");
       });
 
 };

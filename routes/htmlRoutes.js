@@ -1,27 +1,18 @@
+var isAuthenticated = require("../config/middleware/isAuthenticated")
+
 
 module.exports = function(app) {  
     app.get("/", function(req, res) {
+        if (req.user) {
+            res.redirect("/library");
+          }
+          
         res.render("index");
     });
 
-    app.get("/library", function(req,res){
+    app.get("/library", isAuthenticated, function(req,res){
         res.render("userPage");
     });
-
-//   // cms route loads cms.html
-//   app.get("/cms", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/cms.html"));
-//   });
-
-//   // blog route loads blog.html
-//   app.get("/blog", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/blog.html"));
-//   });
-
-//   // authors route loads author-manager.html
-//   app.get("/authors", function(req, res) {
-//     res.sendFile(path.join(__dirname, "../public/author-manager.html"));
-//   });
-
-
+    
+    
 };
