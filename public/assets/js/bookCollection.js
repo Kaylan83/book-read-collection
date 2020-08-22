@@ -15,12 +15,22 @@ $(document).ready(function() {
         
         $.post("/api/login", loginUser)
             .then(() => {
+                $.ajax({
+                    method: "GET",
+                    url: "/api/library",
+                }).then(function(data) {
+                    console.log("Book library data" , data);
+                }); 
+                        })
+                        .catch(err => {
+                        console.log(err);
+                        });
+                
+                
               window.location.replace("/library");
               // If there's an error, log the error
-            })
-            .catch(err => {
-              console.log(err);
-            });
+              //Get call for the library list
+            
         
     });
     
@@ -69,7 +79,7 @@ $(document).ready(function() {
         var bookTitle = $("#bookTitle").val().trim();
         var authorName = $("#bookAuthor").val().trim();
         var bookLink = $("#bookLink").val().trim();
-        //var user_id = $()
+        
         
         
         var newBook = {
@@ -119,8 +129,9 @@ $(document).ready(function() {
               console.log("Signing in!");
             });   
     });
-
+    
+    
     
 
-    
+   
 });
