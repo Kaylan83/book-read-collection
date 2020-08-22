@@ -5,7 +5,6 @@ module.exports = function(app) {
 
       // POST route for saving a new book
   app.post("/api/library", function(req, res) {
-      console.log(req.body);
     db.Library.create({
         book_title: req.body.book_title,
         author: req.body.author,
@@ -14,6 +13,26 @@ module.exports = function(app) {
     }).then(function(dbPost) {
       res.json(dbPost);
     });
+    
+
+  });
+  
+  
+  app.get("/api/library", function(req, res) {
+      //console.log(req.query);
+      // var query = {};
+    // if (req.query.UserId) {
+    //     query.UserId = req.query.UserId;
+    //   }
+    
+    db.Library.findAll({
+        // where: query,
+        // include: [db.Users]
+      }).then(function(dbPost) {
+          console.log(dbPost);
+        res.json(dbPost);
+      });   
+
   });
   
   
@@ -23,7 +42,6 @@ module.exports = function(app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-        console.log("User data, library api route:" + req.user);
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
