@@ -18,22 +18,22 @@ module.exports = function(app) {
   });
   
   
-  app.get("/api/library", function(req, res) {
-      //console.log(req.query);
-      // var query = {};
-    // if (req.query.UserId) {
-    //     query.UserId = req.query.UserId;
-    //   }
+//   app.get("/api/library", function(req, res) {
+//       console.log("############Query:", req.query.UserId);
+//       var query = {};
+//         if (req.user.id) {
+//         query.UserId = req.user.id;
+//       }
     
-    db.Library.findAll({
-        // where: query,
-        // include: [db.Users]
-      }).then(function(dbPost) {
-          console.log(dbPost);
-        res.json(dbPost);
-      });   
+//     db.Library.findAll({
+//          where: query,
+//          include: [db.Users]
+//       }).then(function(dbPost) {
+//           // console.log(dbPost);
+//         res.json(dbPost);
+//       });   
 
-  });
+//   });
   
   
   

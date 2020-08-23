@@ -15,22 +15,12 @@ $(document).ready(function() {
         
         $.post("/api/login", loginUser)
             .then(() => {
-                $.ajax({
-                    method: "GET",
-                    url: "/api/library",
-                }).then(function(data) {
-                    console.log("Book library data" , data);
-                }); 
-                        })
-                        .catch(err => {
-                        console.log(err);
-                        });
-                
-                
               window.location.replace("/library");
               // If there's an error, log the error
-              //Get call for the library list
-            
+            })
+            .catch(err => {
+              console.log(err);
+            });
         
     });
     
@@ -94,6 +84,7 @@ $(document).ready(function() {
             url: "/api/library",
             data: newBook
           }).then(function(data) {
+            location.reload();
             });
             
             
@@ -131,6 +122,14 @@ $(document).ready(function() {
     });
     
     
+    
+    //Get call for the library list
+    // $.ajax({
+    //     method: "GET",
+    //     url: "/api/library",
+    // }).then(function(data) {
+    //     console.log("Book library data" , data);
+    //   }); 
     
 
    

@@ -57,7 +57,21 @@
             </div>
           </div>
         
-            <h2>append books here</h2>
+            <h2>Your Books</h2>
+            
+            <ul>
+                {{#each book}}
+                <div class = "row">
+                  <div class = "col-md-9">
+                    <li>Book Title: {{dataValues.book_title}}  Book </li>
+                  </div>
+                  <div class = "col-sm-3">
+                    <button data-id="{{dataValues.id}}" id = "deleteBook" class="btn btn-danger">Delete Book</button>
+                  </div>
+                </div>
+                
+                {{/each}}
+            </ul>
         
 
         </div>
