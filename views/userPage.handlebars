@@ -57,16 +57,17 @@
             </div>
           </div>
         
-            <h2>Your Books</h2>
+            <h2 style="color: white">Your Books:</h2>
             
             <ul>
                 {{#each book}}
-                <div class = "row">
-                  <div class = "col-md-9">
-                    <li>Book Title: <a href="">{{dataValues.book_title}}</a>  Book </li>
+                <div class = "row liStyle">
+                  <div class = "col-md-7">
+                    <li>Book {{dataValues.id}}: <a  href="{{dataValues.book_link}}" target="blank">{{dataValues.book_title}}</a>  written by {{dataValues.author}} </li>
                   </div>
-                  <div class = "col-sm-3">
-                    <button data-id="{{dataValues.id}}" id = "deleteBook" class="btn btn-danger">Delete Book</button>
+                  <div class = "col-sm-3"></div>
+                  <div class = "col-sm-2">
+                    <button data-id="{{dataValues.id}}" id = "deleteBook" class="btn btn-danger btnMargin">Delete Book</button>
                   </div>
                 </div>
                 

@@ -131,6 +131,16 @@ $(document).ready(function() {
     //     console.log("Book library data" , data);
     //   }); 
     
+    // $("#deleteBook").on("click", function (ev) {
+    //     ev.preventDefault();
+    //     let id = $(this).data("id");
+    //     $.ajax({
+    //         method: "DELETE",
+    //         url: "/api/library" + id
+    //     }).then(function(){
 
+    //     })
+        
+    // });
    
 });
