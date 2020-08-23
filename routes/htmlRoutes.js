@@ -1,4 +1,5 @@
-var isAuthenticated = require("../config/middleware/isAuthenticated")
+var isAuthenticated = require("../config/middleware/isAuthenticated");
+var db = require("../models");
 
 
 module.exports = function(app) {  
@@ -11,7 +12,22 @@ module.exports = function(app) {
     });
 
     app.get("/library", isAuthenticated, function(req,res){
-        res.render("userPage");
+        var query = {};
+        if (req.user.id) {
+            query.UserId = req.user.id;
+        }
+        
+        db.Library.findAll({
+            where: query,
+            include: [db.Users]
+        }).then(function(data) {
+            //console.log(data[0].dataValues);
+            
+            var bookObj = { book: data };
+            
+            console.log(bookObj.book[0].dataValues);
+            res.render("userPage", bookObj);
+        }); 
     });
     
     
