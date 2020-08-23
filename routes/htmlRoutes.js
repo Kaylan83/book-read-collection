@@ -25,7 +25,7 @@ module.exports = function(app) {
             
             var bookObj = { book: data };
             
-            console.log(bookObj.book[0].dataValues);
+            //console.log(bookObj.book[0].dataValues);
             res.render("userPage", bookObj);
         }); 
     });
