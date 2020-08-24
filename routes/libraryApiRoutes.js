@@ -18,25 +18,6 @@ module.exports = function(app) {
   });
   
   
-//   app.get("/api/library", function(req, res) {
-//       console.log("############Query:", req.query.UserId);
-//       var query = {};
-//         if (req.user.id) {
-//         query.UserId = req.user.id;
-//       }
-    
-//     db.Library.findAll({
-//          where: query,
-//          include: [db.Users]
-//       }).then(function(dbPost) {
-//           // console.log(dbPost);
-//         res.json(dbPost);
-//       });   
-
-//   });
-  
-  
-  
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
@@ -50,6 +31,29 @@ module.exports = function(app) {
       });
     }
   });
+  
+  
+  app.delete("/api/library/:id", function(req, res) {
+    console.log(req.params.id);
+    db.Library.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(function(data) {
+        res.json(data);
+      });
+  });
+
+  app.put("/api/library/:id", function(req,res){
+    db.Library.update(req.body,{
+      where: {
+        id: req.params.id
+      }
+    }).then(function(data){
+      res.json(data);
+    })
+  })
   
   
 };
