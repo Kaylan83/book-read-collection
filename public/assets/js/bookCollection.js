@@ -54,6 +54,7 @@ $(document).ready(function() {
             data: newUser
           }).then(function(data) {
               console.log("Succesfully created new user!");
+              location.reload();
             });           
             
         //Clear input fields
@@ -66,9 +67,9 @@ $(document).ready(function() {
     $("#addNewBook").on("click", function(ev) {
         ev.preventDefault();
         console.log("new book add")
-        var bookTitle = $("#bookTitle").val().trim();
-        var authorName = $("#bookAuthor").val().trim();
-        var bookLink = $("#bookLink").val().trim();
+        let bookTitle = $("#bookTitle").val().trim();
+        let authorName = $("#bookAuthor").val().trim();
+        let bookLink = $("#bookLink").val().trim();
         
         
         
@@ -98,7 +99,6 @@ $(document).ready(function() {
     
     
     //Login User and Password
-    
     $("#loginButton").on("click", function(ev) {
         ev.preventDefault();
         
@@ -122,25 +122,48 @@ $(document).ready(function() {
     });
     
     
-    
-    //Get call for the library list
-    // $.ajax({
-    //     method: "GET",
-    //     url: "/api/library",
-    // }).then(function(data) {
-    //     console.log("Book library data" , data);
-    //   }); 
-    
-    // $("#deleteBook").on("click", function (ev) {
-    //     ev.preventDefault();
-    //     let id = $(this).data("id");
-    //     $.ajax({
-    //         method: "DELETE",
-    //         url: "/api/library" + id
-    //     }).then(function(){
-
-    //     })
+    //Event handler to delete book
+    $(".deleteBook").on("click", function (ev) {
+        ev.preventDefault();
+        let id = $(this).data("id");
+        $.ajax({
+            method: "DELETE",
+            url: "/api/library/" + id
+        }).then(function(){
+            location.reload();
+        })
         
-    // });
+    });
+
+
+    //Event handler to edit book
+    $(".editBookBtn").on("click", function(ev) {
+        ev.preventDefault();
+        let id = $(this).data("id");
+
+        let bookTitle = $("#bookTitle" + id).val().trim();
+        let authorName = $("#bookAuthor" + id).val().trim();
+        let bookLink = $("#bookLink" +id).val().trim();
+
+        var updatedBook = {
+            book_title: bookTitle,
+            author: authorName,
+            book_link: bookLink
+        }
+
+        $.ajax({
+            method: "PUT",
+            url: "api/library/" + id,
+            data: updatedBook
+            }).then(function(data){
+
+            location.reload();
+        });
+
+        $("#bookTitle" + id).val("");
+        $("#bookAuthor" + id).val("");
+        $("#bookLink" + id).val("");
+    })
+
    
 });

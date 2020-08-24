@@ -1,80 +1,139 @@
 <div class="conainer-fluid">
-        <nav class="navbar  trans row">
-            <div class="col-sm-4"></div>
-            <div>
-                
-                <h1 class="align-middle"> Welcome Book Read Collection </h1>
-   
-            </div>
-            <div class="col-sm-3"></div>
-            <div class = "col-sm-1">
-                  <a href="/logout" class="btn btn-secondary">logout</a>
-            </div>
-          </nav>
+  <nav class="navbar  trans row">
+    <div class="col-sm-4"></div>
+    <div>
+
+      <h1 class="align-middle"> Welcome Book Read Collection </h1>
+
     </div>
+    <div class="col-sm-3"></div>
+    <div class="col-sm-1">
+      <a href="/logout" class="btn btn-secondary">logout</a>
+    </div>
+  </nav>
+</div>
 
-    <div class = "container marginTop ">
-        <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
-            Add Book
+<div class="container marginTop ">
+  <button type="button" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#addBook">
+    Add Book
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="addBook" tabindex="-1" aria-labelledby="addBookLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addBookLabel">Add Book</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-          
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">Book Title</span>
-                        </div>
-                        <input id ="bookTitle" placeholder = "Great expectations" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                      </div>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">&nbsp;Author &nbsp;</span>
-                        </div>
-                        <input id = "bookAuthor" placeholder = "Charles Dickens" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                      </div>
-                      <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text" id="inputGroup-sizing-default">Book Link</span>
-                        </div>
-                        <input id = "bookLink" placeholder = "Book@google.com"type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
-                      </div>
+        </div>
+        <div class="modal-body">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Book Title</span>
+            </div>
+            <input id="bookTitle" placeholder="Great expectations" type="text" class="form-control" aria-label="Default"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">&nbsp;Author &nbsp;</span>
+            </div>
+            <input id="bookAuthor" placeholder="Charles Dickens" type="text" class="form-control" aria-label="Default"
+              aria-describedby="inputGroup-sizing-default">
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Book Link</span>
+            </div>
+            <input id="bookLink" placeholder="Ex: https://google.com include full link" type="text" class="form-control"
+              aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          </div>
 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="addNewBook" class="btn btn-primary">Add Book</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 style="color: white">Your Books:</h2>
+
+  <ul>
+    {{#each book}}
+    <div class="row liStyle">
+      <div class="col-md-7">
+        <li>Book {{dataValues.id}}: <a href="{{dataValues.book_link}}" target="_blank">{{dataValues.book_title}}</a>
+         &nbsp; written by &nbsp; {{dataValues.author}} </li>
+      </div>
+      <div class="col-sm-1"></div>
+      <div class="col-sm-2">
+
+
+        <button type="button" data-id="{{dataValues.id}}" class="btn btnMargin btn-primary btnMargin editBook"
+          data-toggle="modal" data-target="#editBook{{dataValues.id}}">
+          Edit Book
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editBook{{dataValues.id}}" tabindex="-1" aria-labelledby="editBookLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="editBookLabel">Edit Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Book Title</span>
+                  </div>
+                  <input id="bookTitle{{dataValues.id}}" placeholder="Great expectations" type="text" class="form-control"
+                    aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{dataValues.book_title}}">
+                    
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" id = "addNewBook" class="btn btn-primary">Add Book</button>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">&nbsp;Author &nbsp;</span>
+                  </div>
+                  <input id="bookAuthor{{dataValues.id}}" placeholder="Charles Dickens" type="text" class="form-control"
+                    aria-label="Default" aria-describedby="inputGroup-sizing-default" value="{{dataValues.author}}">
+                    
                 </div>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Book Link</span>
+                  </div>
+                  <input id="bookLink{{dataValues.id}}" placeholder="Ex: https://google.com include full link" type="text"
+                    class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                    value="{{dataValues.book_link}}">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button data-id="{{dataValues.id}}" type="button" class="btn btn-primary editBookBtn">Edit Book</button>
               </div>
             </div>
           </div>
-        
-            <h2 style="color: white">Your Books:</h2>
-            
-            <ul>
-                {{#each book}}
-                <div class = "row liStyle">
-                  <div class = "col-md-7">
-                    <li>Book {{dataValues.id}}: <a  href="{{dataValues.book_link}}" target="blank">{{dataValues.book_title}}</a>  written by {{dataValues.author}} </li>
-                  </div>
-                  <div class = "col-sm-3"></div>
-                  <div class = "col-sm-2">
-                    <button data-id="{{dataValues.id}}" id = "deleteBook" class="btn btn-danger btnMargin">Delete Book</button>
-                  </div>
-                </div>
-                
-                {{/each}}
-            </ul>
-        
-
         </div>
- 
+
+
+      </div>
+      <div class="col-sm-2">
+        <button data-id="{{dataValues.id}}" class="btn btn-danger btnMargin deleteBook">Delete Book</button>
+      </div>
     </div>
+
+    {{/each}}
+  </ul>
+
+
+</div>
+
+</div>
