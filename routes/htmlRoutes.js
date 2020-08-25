@@ -21,12 +21,12 @@ module.exports = function(app) {
             where: query,
             include: [db.Users]
         }).then(function(data) {
-            //console.log(data[0].dataValues);
+            
             
             var bookObj = { book: data };
-            
-            //console.log(bookObj.book[0].dataValues);
+                
             res.render("userPage", bookObj);
+            
         }); 
     });
     

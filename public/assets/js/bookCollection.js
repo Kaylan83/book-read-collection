@@ -25,9 +25,9 @@ $(document).ready(function() {
     });
     
     
-    $.get("/api/user_data").then(data => {
-        $(".member-name").text(data.email);
-      });
+    // $.get("/api/user_data").then(data => {
+    //     $(".member-name").text(data.email);
+    //   });
     
     
     //New User submit in modal
@@ -133,6 +133,19 @@ $(document).ready(function() {
             location.reload();
         })
         
+    });
+
+    $(".deleteAccountBtn").on("click", function(ev){
+        ev.preventDefault();
+
+        //let id =$(this).data("id")
+    //console.log(id)
+        $.ajax({
+            method: "DELETE",
+            url: "/api/users"
+        }).then(function(){
+            window.location.replace("/");
+        });
     });
 
 
