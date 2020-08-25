@@ -10,8 +10,8 @@ module.exports = function(app) {
         author: req.body.author,
         book_link: req.body.book_link,
         UserId: req.user.id
-    }).then(function(dbPost) {
-      res.json(dbPost);
+    }).then(function(data) {
+      res.json(data);
     });
     
 
