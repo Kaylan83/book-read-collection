@@ -34,6 +34,8 @@
 
           <button id="loginButton" type="submit" class="btn btn-primary">Submit</button>
           
+          <div id="loginErr"></div>
+          
         </form>
           
             <div>
@@ -52,7 +54,7 @@
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id="signupBody">
                                             
                                               <div class="input-group mb-3">
                                             <div class="input-group-prepend">
@@ -78,6 +80,8 @@
                                             </div>
                                             <input id = "lastName" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
                                           </div>
+                                          
+                                          <div id="signupErr"></div>
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -87,6 +91,8 @@
                                   </div>
                                 </div>
                               </div>
+
+                              
             </div>
             <div>
               <br>

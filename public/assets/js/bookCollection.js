@@ -1,10 +1,14 @@
 $(document).ready(function() {
 
+
+
+   
     //Login info
     $("#loginButton").on("click", function(ev) {
         ev.preventDefault();     
         var loginUserName = $("#signinUsername").val().trim();
         var loginPass = $("#signinPassword").val().trim();  
+        var errDiv = $("#loginErr");  
         
         
         let loginUser = {
@@ -14,12 +18,16 @@ $(document).ready(function() {
         
         
         $.post("/api/login", loginUser)
-            .then(() => {
+            .then((res) => {
+
+            
               window.location.replace("/library");
               // If there's an error, log the error
             })
             .catch(err => {
               console.log(err);
+              errDiv.empty();
+                $(errDiv.append('<p class="loginErrorDiv">Error logging in - Username or password incorrect</p>'));
             });
         
     });
@@ -40,6 +48,22 @@ $(document).ready(function() {
         var firstName = $("#firstName").val().trim();
         var lastName = $("#lastName").val().trim();
         
+        var signUpBody = $("#signupErr");
+
+        if (userName.length < 5 || userName.length > 20) {
+            signUpBody.empty();
+            $(signUpBody.append('<p style="color: red; text-align: left;">Username must be between 5 and 20 characters</p>'));
+        } else if(password.length < 8){
+            signUpBody.empty();
+            $(signUpBody.append('<p style="color: red; text-align: left;">Password should be at least 8 characters</p>'));
+        } else if (firstName.length === 0) {
+            signUpBody.empty();
+            $(signUpBody.append('<p style="color: red; text-align: left;">Sorry first name cannot be empty</p>'));  
+        } else if (lastName.length ===0){
+            signUpBody.empty();
+            $(signUpBody.append('<p style="color: red; text-align: left;">Sorry last name cannot be empty</p>'));
+        }
+        
         var newUser = {
             user_name: userName,
             password: password,
@@ -53,9 +77,16 @@ $(document).ready(function() {
             url: "/api/users/",
             data: newUser
           }).then(function(data) {
+              console.log(data);
               console.log("Succesfully created new user!");
               location.reload();
-            });           
+            }).catch(function(err) {
+                // $("#alert .msg").text(err.responseJSON);
+                // $("#alert").fadeIn(500);
+                signUpBody.empty();
+                $(signUpBody.append('<p style="color: red; text-align: left;">Username must be unique</p>'));
+            });       
+            
             
         //Clear input fields
         $("#userName").val("");
@@ -136,16 +167,27 @@ $(document).ready(function() {
     });
 
     $(".deleteAccountBtn").on("click", function(ev){
-        ev.preventDefault();
+        ev.preventDefault();     
 
-        //let id =$(this).data("id")
-    //console.log(id)
+        let id =$(this).data("id")
+    
         $.ajax({
             method: "DELETE",
-            url: "/api/users"
-        }).then(function(){
-            window.location.replace("/");
+            url: "/api/users/" + id
+        }).then(function(data){
+            location.reload();
         });
+
+        // $.ajax({
+        //     method: "DELETE",
+        //     url: "/api/library/" + id
+        // }).then(function(data){
+            
+         
+            
+        // }); 
+    
+        
     });
 
 
@@ -156,7 +198,7 @@ $(document).ready(function() {
 
         let bookTitle = $("#bookTitle" + id).val().trim();
         let authorName = $("#bookAuthor" + id).val().trim();
-        let bookLink = $("#bookLink" +id).val().trim();
+        let bookLink = $("#bookLink" + id).val().trim();
 
         var updatedBook = {
             book_title: bookTitle,
@@ -166,7 +208,7 @@ $(document).ready(function() {
 
         $.ajax({
             method: "PUT",
-            url: "api/library/" + id,
+            url: "api/users/" + id,
             data: updatedBook
             }).then(function(data){
 

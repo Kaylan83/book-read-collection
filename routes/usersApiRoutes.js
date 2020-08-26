@@ -24,8 +24,11 @@ module.exports = function(app) {
             }
         }).then(function(dbTodo) {
             // We have access to the todos as an argument inside of the callback function
+            //console.log(dbTodo);
             res.json(dbTodo);
-          });
+          }).catch(function(err) {
+            res.status(401).json(err);
+          })
         
     });
     
@@ -42,6 +45,8 @@ module.exports = function(app) {
         }).then(function(dbUser) {
           // We have access to the new todo as an argument inside of the callback function
           res.json(dbUser);
+        }).catch(function(err) {
+          res.status(401).json(err);
         });
     });
     
@@ -52,16 +57,16 @@ module.exports = function(app) {
       });
 
 
-      app.delete("/api/users", function(req, res) {
-        
-        console.log(user_id)
+      app.delete("/api/users/:id" , function(req, res) {
+                
         db.Users.destroy({
           where: {
-            id: user_id
+            id: req.params.id
           }
         })
           .then(function(data) {
             res.json(data);
+          res.redirect("/");
           });
       });
 

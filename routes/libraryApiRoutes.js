@@ -56,4 +56,16 @@ module.exports = function(app) {
   })
   
   
+  //Delete account button
+  // app.delete("/api/library/:id", function(req, res) {
+  //   db.Library.destroy({
+  //     where: {
+  //       UserId: req.params.id
+  //     }
+  //   }).then(function(data){
+  //     res.json(data);
+  //   })
+  // });
+  
+  
 };
