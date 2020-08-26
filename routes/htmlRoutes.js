@@ -21,9 +21,11 @@ module.exports = function(app) {
             where: query,
             include: [db.Users]
         }).then(function(data) {
-            
-            
-            var bookObj = { book: data };
+                       
+            var bookObj = { 
+                book: data,
+               //currentUserId: data[0].User.dataValues.id
+            };
                 
             res.render("userPage", bookObj);
             
