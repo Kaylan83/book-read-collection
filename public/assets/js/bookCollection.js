@@ -130,27 +130,27 @@ $(document).ready(function() {
     
     
     //Login User and Password
-    $("#loginButton").on("click", function(ev) {
-        ev.preventDefault();
+    // $("#loginButton").on("click", function(ev) {
+    //     ev.preventDefault();
         
-        //Grab input fields
-        var userName = $("#signinUsername").val().trim();
-        var password = $("#signinPassword").val().trim();
+    //     //Grab input fields
+    //     var userName = $("#signinUsername").val().trim();
+    //     var password = $("#signinPassword").val().trim();
         
-        var user = {
-            user_name: userName,
-            password: password,
-        }
+    //     var user = {
+    //         user_name: userName,
+    //         password: password,
+    //     }
         
-        //Send new user info to the api route
-        $.ajax({
-            method: "GET",
-            url: "/api/users/",
-            data: user
-          }).then(function(data) {
-              console.log("Signing in!");
-            });   
-    });
+    //     //Send new user info to the api route
+    //     $.ajax({
+    //         method: "GET",
+    //         url: "/api/users/",
+    //         data: user
+    //       }).then(function(data) {
+    //           console.log("Signing in!");
+    //         });   
+    // });
     
     
     //Event handler to delete book
@@ -173,9 +173,9 @@ $(document).ready(function() {
     
         $.ajax({
             method: "DELETE",
-            url: "/api/users/" + id
+            url: "/api/users"
         }).then(function(data){
-            location.reload();
+            window.location.replace("/logout");
         });
 
         // $.ajax({
