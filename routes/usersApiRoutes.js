@@ -1,6 +1,7 @@
 
 var db = require("../models");
 var passport = require("../config/passport");
+const { RSA_NO_PADDING } = require("constants");
 
 module.exports = function(app) {  
   var user_id =""
@@ -57,17 +58,27 @@ module.exports = function(app) {
       });
 
 
-      app.delete("/api/users/:id" , function(req, res) {
-                
+      app.delete("/api/users" , function(req, res) {
+
+        db.Library.destroy({
+          where: {
+            UserId: user_id
+          }
+        }).then(function(data){
+          res.json(data);
+
+                          
         db.Users.destroy({
           where: {
-            id: req.params.id
+            id: user_id
           }
         })
           .then(function(data) {
             res.json(data);
           res.redirect("/");
           });
+        })
+
       });
 
 };
