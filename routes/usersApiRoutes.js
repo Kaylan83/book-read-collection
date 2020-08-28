@@ -25,7 +25,6 @@ module.exports = function(app) {
             }
         }).then(function(dbTodo) {
             // We have access to the todos as an argument inside of the callback function
-            //console.log(dbTodo);
             res.json(dbTodo);
           }).catch(function(err) {
             res.status(401).json(err);
@@ -43,6 +42,8 @@ module.exports = function(app) {
           password: req.body.password,
           first_name: req.body.first_name,
           last_name: req.body.last_name
+          // line 47 is for the future functionality forgot password
+          //,security_answer: req.body.security_answer
         }).then(function(dbUser) {
           // We have access to the new todo as an argument inside of the callback function
           res.json(dbUser);
@@ -57,9 +58,7 @@ module.exports = function(app) {
         res.redirect("/");
       });
 
-
       app.delete("/api/users" , function(req, res) {
-
         db.Library.destroy({
           where: {
             UserId: user_id
@@ -78,7 +77,6 @@ module.exports = function(app) {
           res.redirect("/");
           });
         })
-
       });
 
 };

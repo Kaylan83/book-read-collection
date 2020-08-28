@@ -33,6 +33,15 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         }
+        // lines 37 to 44 are for the forgot password functionality
+        // ,
+        // security_answer:{
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         len: [1]
+        //     }
+        // }
   
     });
 

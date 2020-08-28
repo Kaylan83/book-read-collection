@@ -1,25 +1,19 @@
 $(document).ready(function() {
-
-
-
    
-    //Login info
+    //Login handler
     $("#loginButton").on("click", function(ev) {
         ev.preventDefault();     
         var loginUserName = $("#signinUsername").val().trim();
         var loginPass = $("#signinPassword").val().trim();  
-        var errDiv = $("#loginErr");  
-        
+        var errDiv = $("#loginErr");        
         
         let loginUser = {
             user_name: loginUserName,
             password: loginPass
         }
-        
-        
+              
         $.post("/api/login", loginUser)
             .then((res) => {
-
             
               window.location.replace("/library");
               // If there's an error, log the error
@@ -28,14 +22,8 @@ $(document).ready(function() {
               console.log(err);
               errDiv.empty();
                 $(errDiv.append('<p class="loginErrorDiv">Error logging in - Username or password incorrect</p>'));
-            });
-        
+            })       
     });
-    
-    
-    // $.get("/api/user_data").then(data => {
-    //     $(".member-name").text(data.email);
-    //   });
     
     
     //New User submit in modal
@@ -47,6 +35,7 @@ $(document).ready(function() {
         var password = $("#password").val().trim();
         var firstName = $("#firstName").val().trim();
         var lastName = $("#lastName").val().trim();
+        //var secAnswer = $("#secAnswer").val().trim();
         
         var signUpBody = $("#signupErr");
 
@@ -62,13 +51,20 @@ $(document).ready(function() {
         } else if (lastName.length ===0){
             signUpBody.empty();
             $(signUpBody.append('<p style="color: red; text-align: left;">Sorry last name cannot be empty</p>'));
-        }
+        } 
+
+        // lines 69 to 72 are for the forgot password functionality
+        // else if (secAnswer.length === 0) {
+        //     signUpBody.empty();
+        //     $(signUpBody.append('<p style="color: red; text-align: left;">Sorry the security question answer cannot be empty</p>'));
+        // }
         
         var newUser = {
             user_name: userName,
             password: password,
             first_name: firstName,
-            last_name: lastName
+            last_name: lastName,
+            //security_answer: secAnswer
         }
         
         //Send new user info to the api route
@@ -92,17 +88,18 @@ $(document).ready(function() {
         $("#userName").val("");
         $("#password").val("");
         $("#firstName").val("");
-        $("#lastName").val("");   
+        $("#lastName").val("");
+        //$("#secAnswer").val("");   
     });
 
+    // event handler to add new book
     $("#addNewBook").on("click", function(ev) {
         ev.preventDefault();
         console.log("new book add")
         let bookTitle = $("#bookTitle").val().trim();
         let authorName = $("#bookAuthor").val().trim();
         let bookLink = $("#bookLink").val().trim();
-        
-        
+           
         
         var newBook = {
             book_title: bookTitle,
@@ -123,34 +120,8 @@ $(document).ready(function() {
         //Clear input fields
         $("#bookTitle").val("");
         $("#bookAuthor").val("");
-        $("#bookLink").val("");
-        
-            
+        $("#bookLink").val("");        
     });
-    
-    
-    //Login User and Password
-    // $("#loginButton").on("click", function(ev) {
-    //     ev.preventDefault();
-        
-    //     //Grab input fields
-    //     var userName = $("#signinUsername").val().trim();
-    //     var password = $("#signinPassword").val().trim();
-        
-    //     var user = {
-    //         user_name: userName,
-    //         password: password,
-    //     }
-        
-    //     //Send new user info to the api route
-    //     $.ajax({
-    //         method: "GET",
-    //         url: "/api/users/",
-    //         data: user
-    //       }).then(function(data) {
-    //           console.log("Signing in!");
-    //         });   
-    // });
     
     
     //Event handler to delete book
@@ -166,6 +137,7 @@ $(document).ready(function() {
         
     });
 
+    // event handler for deletiing the account
     $(".deleteAccountBtn").on("click", function(ev){
         ev.preventDefault();     
 
@@ -177,19 +149,8 @@ $(document).ready(function() {
         }).then(function(data){
             window.location.replace("/logout");
         });
-
-        // $.ajax({
-        //     method: "DELETE",
-        //     url: "/api/library/" + id
-        // }).then(function(data){
-            
-         
-            
-        // }); 
-    
         
     });
-
 
     //Event handler to edit book
     $(".editBookBtn").on("click", function(ev) {
@@ -219,6 +180,5 @@ $(document).ready(function() {
         $("#bookAuthor" + id).val("");
         $("#bookLink" + id).val("");
     })
-
-   
+  
 });
