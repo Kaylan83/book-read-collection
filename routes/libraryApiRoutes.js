@@ -13,11 +13,9 @@ module.exports = function(app) {
     }).then(function(data) {
       res.json(data);
     });
-    
-
   });
   
-  
+  // route to get the user data
   app.get("/api/user_data", (req, res) => {
     if (!req.user) {
       // The user is not logged in, send back an empty object
@@ -32,7 +30,7 @@ module.exports = function(app) {
     }
   });
   
-  
+  // delete book request
   app.delete("/api/library/:id", function(req, res) {
     console.log(req.params.id);
     db.Library.destroy({
@@ -54,18 +52,5 @@ module.exports = function(app) {
       res.json(data);
     })
   })
-  
-  
-  //Delete account button
-  // app.delete("/api/library/:id", function(req, res) {
-  //   db.Library.destroy({
-  //     where: {
-  //       UserId: req.params.id
-  //     }
-  //   }).then(function(data){
-  //     res.json(data);
-  //   })
-  // });
-  
-  
+ 
 };

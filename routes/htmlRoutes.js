@@ -1,13 +1,11 @@
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 var db = require("../models");
 
-
 module.exports = function(app) {  
     app.get("/", function(req, res) {
         if (req.user) {
             res.redirect("/library");
-          }
-          
+          }  
         res.render("index");
     });
 
@@ -24,11 +22,8 @@ module.exports = function(app) {
                        
             var bookObj = { 
                 book: data,
-               //currentUserId: data[0].User.dataValues.id
-            };
-                
-            res.render("userPage", bookObj);
-            
+            };      
+            res.render("userPage", bookObj);   
         }); 
     });
     

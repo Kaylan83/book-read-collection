@@ -16,6 +16,7 @@ body {
     background-color: rgba(73, 73, 73, 0.295);
     color: white;
     font-size: 15px;
+    text-align: center;
 }
 
 .modal-title{
@@ -56,3 +57,19 @@ a{
     font-size: 12px;
 }
 
+@media screen and (max-width: 767px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .btn {
+        font-size: 12px;
+    }
+    .col-sm-2 {
+        -ms-flex: 0 0 30%;
+        flex: 0 0 30%;
+        max-width: 50%;
+    }
+    li {
+        padding-bottom: 15px;
+    }
+}
