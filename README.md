@@ -11,21 +11,18 @@ Murad Alkaylanie
 
 #### Created On: 08/18/2020 
 
-​![Product Logo](./public/images/mockup-hp.png)   
-​![Product Logo](./public/images/mockup-input-page.png)   
-​![Product Logo](./public/images/mockup-user-page.png)   
+​![Product Logo](./public/images/mockup-hp-new.png)   
+​![Product Logo](./public/images/mockup-input-page-new.png)   
+​![Product Logo](./public/images/mockup-user-page-new.png)   
 
 ## Description
 A full stack application that allows a user track books that they read, add books to the list, and view others books.
 
 ## Table of Contents
-* [Installation](#installation)
 * [Usage](#usage)
 * [License](#license)
 * [Questions](#questions)
 
-## Installation
-1. 
 
 ## Usage
 A user can create books for their reading list.

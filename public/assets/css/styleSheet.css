@@ -57,6 +57,10 @@ a{
     font-size: 12px;
 }
 
+.align-middle {
+    margin: auto;
+}
+
 @media screen and (max-width: 767px) {
     h1 {
         font-size: 1.8rem;
