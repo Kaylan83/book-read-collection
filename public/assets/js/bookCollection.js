@@ -53,7 +53,7 @@ $(document).ready(function() {
             $(signUpBody.append('<p style="color: red; text-align: left;">Sorry last name cannot be empty</p>'));
         } 
 
-        // lines 69 to 72 are for the forgot password functionality
+        //lines 69 to 72 are for the forgot password functionality
         // else if (secAnswer.length === 0) {
         //     signUpBody.empty();
         //     $(signUpBody.append('<p style="color: red; text-align: left;">Sorry the security question answer cannot be empty</p>'));
@@ -77,10 +77,12 @@ $(document).ready(function() {
               console.log("Succesfully created new user!");
               location.reload();
             }).catch(function(err) {
-                // $("#alert .msg").text(err.responseJSON);
-                // $("#alert").fadeIn(500);
-                signUpBody.empty();
-                $(signUpBody.append('<p style="color: red; text-align: left;">Username must be unique</p>'));
+                //console.log(err);
+                var errCode = err.responseJSON.original.code;
+                if (errCode === "ER_DUP_ENTRY") {
+                    signUpBody.empty();
+                    $(signUpBody.append('<p style="color: red; text-align: left;">Username must be unique</p>'));
+                }   
             });       
             
             
